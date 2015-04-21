@@ -1,0 +1,26 @@
+
+<div style="width:100%">
+    <div class="side left"></div>
+    <div class="MainContainer">
+        <div ng-repeat="row in rows">
+            <span>Table Name</span>  <select id="selTable"
+                                             ng-options="table.tblName for  table in row.tables | unique:'tblName'"
+                                             ng-model="row.selectedtable"></select>
+            <span>Field Name</span>    <select ng-options="column.ColumnName for column in row.tables | filter:{ tblId: row.selectedtable.tblId} "
+                                               ng-model="row.selectedField"></select>
+            <span>Operator</span><select ng-options="item.OperatorName for item in row.operator  | filter:{ datatypeSupported: row.selectedField.DataTypeId}"
+                                         ng-model="row.selectedOperator"></select>
+            <input id="txtValue" ng-model="row.selectedValue" />
+            <img src="../images/Add.jpg" ng-click="addNewRow()" />
+
+            <img src="../images/Remove.jpg" ng-click="removeRow(item)" />
+        </div>
+        <div><button type="button" ng-click="GetSearch()">Search</button></div>
+
+        <div>
+            <table id="searchGrid"></table>
+
+        </div>
+    </div><div class="side right"></div>
+</div>
+
